@@ -3,7 +3,9 @@ __author__ = 'robin-luo'
 __date__ = '2023/03/07 15:02'
 */
 
-package solution
+package main
+
+import "fmt"
 
 // 滑动窗口
 func lengthOfLongestSubstring(s string) int {
@@ -24,4 +26,8 @@ func lengthOfLongestSubstring(s string) int {
 	}
 
 	return maxLen
+}
+func main() {
+	maxLen := lengthOfLongestSubstring("12345654321")
+	fmt.Println(maxLen)
 }

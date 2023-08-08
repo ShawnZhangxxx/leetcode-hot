@@ -20,7 +20,6 @@ func twoSum(nums []int, target int) []int {
 		} else {
 			hashmap[nums[i]] = i
 		}
-
 	}
 	return nil
 }

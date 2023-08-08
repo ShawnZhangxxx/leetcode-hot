@@ -3,7 +3,9 @@ __author__ = 'robin-luo'
 __date__ = '2023/03/07 14:02'
 */
 
-package solution
+package main
+
+import "fmt"
 
 func twoSum(nums []int, target int) []int {
 	m := make(map[int]int, len(nums))
@@ -14,6 +16,9 @@ func twoSum(nums []int, target int) []int {
 
 		m[num] = i
 	}
-
 	return nil
+}
+func main() {
+	 nums :=	twoSum([]int{1,2,9,7},10)
+	 fmt.Println(nums)
 }

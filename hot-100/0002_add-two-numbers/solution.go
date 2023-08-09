@@ -74,15 +74,12 @@ func addTwoNumbers2(l1, l2 *ListNode) *ListNode {
 	if l1 != nil && l2 == nil {
 		head.Next = l2
 	}
-
 	if carry > 0 {
 		head.Next = &ListNode{
 			Val: carry,
 			Next: nil,
 		}
 	}
-
-
 	return node.Next
 }
 

@@ -28,6 +28,6 @@ func lengthOfLongestSubstring(s string) int {
 	return maxLen
 }
 func main() {
-	maxLen := lengthOfLongestSubstring("12345654321")
+	maxLen := lengthOfLongestSubstring("61234a5654321666")
 	fmt.Println(maxLen)
 }

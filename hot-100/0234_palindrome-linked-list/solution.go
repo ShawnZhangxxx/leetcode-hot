@@ -6,7 +6,7 @@
  * @Description:
  */
 
-package solution
+package main
 
 type ListNode struct {
 	Val  int

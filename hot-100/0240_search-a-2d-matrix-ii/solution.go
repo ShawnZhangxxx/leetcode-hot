@@ -6,7 +6,7 @@
  * @Description:
  */
 
-package solution
+package main
 
 func searchMatrix(matrix [][]int, target int) bool {
 	m := len(matrix)

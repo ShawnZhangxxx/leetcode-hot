@@ -6,7 +6,7 @@
  * @Description:
  */
 
-package solution
+package main
 
 func canPartition(nums []int) bool {
 	totalSum := 0

@@ -6,7 +6,7 @@
  * @Description:
  */
 
-package solution
+package main
 
 func findTargetSumWays(nums []int, target int) int {
 	count := 0

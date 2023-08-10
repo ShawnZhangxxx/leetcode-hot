@@ -6,7 +6,7 @@
  * @Description:
  */
 
-package solution
+package main
 
 func subarraySum(nums []int, k int) int {
 	count := 0

@@ -6,7 +6,7 @@
  * @Description:
  */
 
-package solution
+package main
 
 func findAnagrams(s, p string) []int {
 	res := make([]int, 0)

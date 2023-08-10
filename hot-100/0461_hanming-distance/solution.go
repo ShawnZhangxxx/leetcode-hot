@@ -6,7 +6,7 @@
  * @Description:
  */
 
-package solution
+package main
 
 func hanmingDistance(x, y int) int {
 	xor := x ^ y

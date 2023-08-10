@@ -3,7 +3,7 @@ __author__ = 'robin-luo'
 __date__ = '2023/03/07 17:14'
 */
 
-package solution
+package main
 
 func isMatch(s, p string) bool {
 	m, n := len(s), len(p)

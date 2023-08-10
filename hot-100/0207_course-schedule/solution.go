@@ -6,7 +6,7 @@
  * @Description:
  */
 
-package solution
+package main
 
 func canFinish(numCourses int, prerequisites [][]int) bool {
 	list := make([][]int, numCourses)

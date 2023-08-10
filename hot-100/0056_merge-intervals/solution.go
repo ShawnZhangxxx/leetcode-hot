@@ -3,7 +3,7 @@ __author__ = 'robin-luo'
 __date__ = '2023/03/17 10:22'
 */
 
-package solution
+package main
 
 import (
 	"sort"

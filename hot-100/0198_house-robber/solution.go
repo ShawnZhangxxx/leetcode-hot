@@ -6,7 +6,7 @@
  * @Description:
  */
 
-package solution
+package main
 
 func rob(nums []int) int {
 	size := len(nums)

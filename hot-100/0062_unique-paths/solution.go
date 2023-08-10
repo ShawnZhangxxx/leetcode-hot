@@ -3,7 +3,7 @@ __author__ = 'robin-luo'
 __date__ = '2023/03/17 10:49'
 */
 
-package solution
+package main
 
 func uniquePaths(m, n int) int {
 	// dp: dp[i][j] = dp[i-1][j] + dp[i][j-1]

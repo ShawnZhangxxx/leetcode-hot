@@ -6,7 +6,7 @@
  * @Description:
  */
 
-package solution
+package main
 
 func numTrees(n int) int {
 	dp := make([]int, n+1)

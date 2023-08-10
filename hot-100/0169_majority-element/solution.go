@@ -6,7 +6,7 @@
  * @Description:
  */
 
-package solution
+package main
 
 func majorityElement(nums []int) int {
 	major, count := 0, 0

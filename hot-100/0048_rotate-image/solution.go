@@ -3,7 +3,7 @@ __author__ = 'robin-luo'
 __date__ = '2023/03/14 16:50'
 */
 
-package solution
+package main
 
 func rotate(matrix [][]int) {
 	size := len(matrix[0])

@@ -6,7 +6,7 @@
  * @Description:
  */
 
-package solution
+package main
 
 import (
 	"math"

@@ -6,7 +6,7 @@
  * @Description:
  */
 
-package solution
+package main
 
 func countBits(n int) []int {
 	dp := make([]int, n+1)

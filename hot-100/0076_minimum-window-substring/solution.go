@@ -3,7 +3,7 @@ __author__ = 'robin-luo'
 __date__ = '2023/06/26 15:03'
 */
 
-package solution
+package main
 
 func minWindow(s, t string) string {
 	if len(s) < len(t) {

@@ -6,7 +6,7 @@
  * @Description:
  */
 
-package solution
+package main
 
 /*
 dp + 分治 top->down

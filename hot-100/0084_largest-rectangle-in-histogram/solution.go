@@ -10,7 +10,7 @@ __author__ = 'robin-luo'
 __date__ = '2023/06/27 10:13'
 */
 
-package solution
+package main
 
 func largestRectangleArea(heights []int) int {
 	var (

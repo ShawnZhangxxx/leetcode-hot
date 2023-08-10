@@ -3,7 +3,7 @@ __author__ = 'robin-luo'
 __date__ = '2023/03/13 09:42'
 */
 
-package solution
+package main
 
 func searchRange(nums []int, target int) []int {
 	l, r := 0, len(nums)-1

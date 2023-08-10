@@ -6,7 +6,7 @@
  * @Description:
  */
 
-package solution
+package main
 
 func maxProfit(prices []int) int {
 	if len(prices) <= 1 {

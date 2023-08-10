@@ -6,7 +6,7 @@
  * @Description:
  */
 
-package solution
+package main
 
 type Trie struct {
 	next   map[rune]*Trie

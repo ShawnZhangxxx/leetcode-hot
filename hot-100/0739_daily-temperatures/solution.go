@@ -6,7 +6,7 @@
  * @Description:
  */
 
-package solution
+package main
 
 func dailyTemperatures(temperatures []int) []int {
 	n := len(temperatures)

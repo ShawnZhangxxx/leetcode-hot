@@ -6,7 +6,7 @@
  * @Description:
  */
 
-package solution
+package main
 
 func findDuplicate(nums []int) int {
 	slow := nums[0]

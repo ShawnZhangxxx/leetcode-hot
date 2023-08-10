@@ -3,7 +3,7 @@ __author__ = 'robin-luo'
 __date__ = '2023/03/15 10:55'
 */
 
-package solution
+package main
 
 import "math"
 

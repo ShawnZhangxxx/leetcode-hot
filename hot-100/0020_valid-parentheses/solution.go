@@ -3,7 +3,7 @@ __author__ = 'robin-luo'
 __date__ = '2023/03/09 14:02'
 */
 
-package solution
+package main
 
 func isValid(s string) bool {
 	var stack []byte

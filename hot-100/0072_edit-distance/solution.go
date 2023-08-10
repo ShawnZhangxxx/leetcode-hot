@@ -3,7 +3,7 @@ __author__ = 'robin-luo'
 __date__ = '2023/03/27 10:22'
 */
 
-package solution
+package main
 
 func minDistance(word1, word2 string) int {
 	m, n := len(word1), len(word2)

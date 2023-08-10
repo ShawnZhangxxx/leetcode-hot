@@ -3,7 +3,7 @@ __author__ = 'robin-luo'
 __date__ = '2023/03/27 10:17'
 */
 
-package solution
+package main
 
 func climbStairs(n int) int {
 	dp := make([]int, n+1)

@@ -6,7 +6,7 @@
  * @Description:
  */
 
-package solution
+package main
 
 func maxSlidingWindow(nums []int, k int) []int {
 	n := len(nums)

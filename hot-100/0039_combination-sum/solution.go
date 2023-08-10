@@ -3,7 +3,7 @@ __author__ = 'robin-luo'
 __date__ = '2023/03/13 19:15'
 */
 
-package solution
+package main
 
 func combinationSum(candidates []int, target int) [][]int {
 	var (

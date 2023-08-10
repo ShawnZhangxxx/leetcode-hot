@@ -3,7 +3,7 @@ __author__ = 'robin-luo'
 __date__ = '2023/06/26 14:47'
 */
 
-package solution
+package main
 
 func sortColors(nums []int) {
 	// 一次扫描，3指针法

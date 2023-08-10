@@ -6,7 +6,7 @@
  * @Description:
  */
 
-package solution
+package main
 
 func countSubstrings(s string) int {
 	count := 0

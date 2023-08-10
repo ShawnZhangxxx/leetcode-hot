@@ -3,7 +3,7 @@ __author__ = 'robin-luo'
 __date__ = '2023/03/09 10:52'
 */
 
-package solution
+package main
 
 func letterCombinations(digits string) []string {
 	digitMap := map[string]string{

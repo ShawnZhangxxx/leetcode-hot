@@ -6,7 +6,7 @@
  * @Description:
  */
 
-package solution
+package main
 
 func removeInvalidParentheses(s string) []string {
 	if len(s) == 0 {

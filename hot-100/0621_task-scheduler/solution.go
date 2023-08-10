@@ -6,7 +6,7 @@
  * @Description:
  */
 
-package solution
+package main
 
 func leastInterval(tasks []byte, n int) int {
 	taskCount := make([]int, 26)

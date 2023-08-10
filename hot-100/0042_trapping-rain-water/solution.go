@@ -3,7 +3,7 @@ __author__ = 'robin-luo'
 __date__ = '2023/03/14 15:08'
 */
 
-package solution
+package main
 
 // 双指针
 func trap(height []int) int {

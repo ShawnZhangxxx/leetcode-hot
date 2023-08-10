@@ -6,7 +6,7 @@
  * @Description:
  */
 
-package solution
+package main
 
 func findDisapearedNumbers(nums []int) []int {
 	res := make([]int, 0)

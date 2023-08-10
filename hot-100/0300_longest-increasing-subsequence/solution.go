@@ -6,7 +6,7 @@
  * @Description:
  */
 
-package solution
+package main
 
 func lengthOfLIS(nums []int) int {
 	n := len(nums)

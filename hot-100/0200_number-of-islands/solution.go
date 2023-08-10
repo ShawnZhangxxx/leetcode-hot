@@ -6,7 +6,7 @@
  * @Description:
  */
 
-package solution
+package main
 
 func numIslands(grid [][]byte) int {
 	var (

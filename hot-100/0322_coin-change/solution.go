@@ -6,7 +6,7 @@
  * @Description:
  */
 
-package solution
+package main
 
 func coinChange(coins []int, amount int) int {
 	if amount < 1 {

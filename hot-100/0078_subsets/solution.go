@@ -3,7 +3,7 @@ __author__ = 'robin-luo'
 __date__ = '2023/06/26 15:18'
 */
 
-package solution
+package main
 
 func subsets(nums []int) [][]int {
 	var (

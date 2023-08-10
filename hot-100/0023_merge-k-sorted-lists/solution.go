@@ -3,7 +3,7 @@ __author__ = 'robin-luo'
 __date__ = '2023/03/10 14:43'
 */
 
-package solution
+package main
 
 import "container/heap"
 

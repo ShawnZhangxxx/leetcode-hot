@@ -3,7 +3,7 @@ __author__ = 'robin-luo'
 __date__ = '2023/06/26 16:58'
 */
 
-package solution
+package main
 
 func exist(board [][]byte, word string) bool {
 	for i := range board {

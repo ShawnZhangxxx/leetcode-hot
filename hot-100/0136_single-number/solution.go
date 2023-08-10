@@ -6,7 +6,7 @@
  * @Description:
  */
 
-package solution
+package main
 
 func singleNumber(nums []int) int {
 	a := 0

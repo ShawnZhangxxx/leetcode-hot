@@ -3,7 +3,7 @@ __author__ = 'robin-luo'
 __date__ = '2023/03/10 15:18'
 */
 
-package solution
+package main
 
 func nextPermutation(nums []int) {
 	left := len(nums) - 2

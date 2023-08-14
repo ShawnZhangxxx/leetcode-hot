@@ -5,7 +5,15 @@ __date__ = '2023/03/08 10:32'
 
 package main
 
-import "math"
+import (
+	"fmt"
+	"math"
+)
+
+func main() {
+	var res int = maxArea([]int{1, 8, 1, 6, 2, 5, 4, 3, 7})
+	fmt.Println(res)
+}
 
 func main() {
 	maxArea([]int{1,2,3})
@@ -24,7 +32,7 @@ func maxArea(height []int) int {
 			right--
 		}
 
-		res = int(math.Max(float64(res), float64(area)))
+		res = int(math.Max(float64(res), float64(area))) //必须转成 float64,之后重新int
 	}
 
 	return res

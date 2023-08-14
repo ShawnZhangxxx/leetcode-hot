@@ -7,6 +7,11 @@ package main
 
 import "math"
 
+func main() {
+	maxArea([]int{1,2,3})
+}
+
+
 func maxArea(height []int) int {
 	left, right := 0, len(height)-1
 	res, area := 0, 0

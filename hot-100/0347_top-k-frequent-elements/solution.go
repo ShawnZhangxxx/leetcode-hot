@@ -29,12 +29,12 @@ func (pq PriorityQueue) Swap(i int, j int) {
 	pq[i], pq[j] = pq[j], pq[i]
 }
 
-func (pq *PriorityQueue) Push(x any) {
+func (pq *PriorityQueue) Push(x interface{} ) {
 	element := x.(*Element)
 	*pq = append(*pq, element)
 }
 
-func (pq *PriorityQueue) Pop() any {
+func (pq *PriorityQueue) Pop() interface{} {
 	element := (*pq)[len(*pq)-1]
 	*pq = (*pq)[:len(*pq)-1]
 	return element

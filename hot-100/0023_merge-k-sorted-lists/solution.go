@@ -4,14 +4,72 @@ __date__ = '2023/03/10 14:43'
 */
 
 package main
-
-import "container/heap"
+//2023-08-14
+import (
+	"container/heap"
+	"fmt"
+)
 
 type ListNode struct {
 	Val  int
 	Next *ListNode
 }
 
+func create(Data ...int) *ListNode {
+	node := &ListNode{}
+	head := node
+	for i := 0; i < len(Data); i++ {
+		newNode := &ListNode{
+			Val: Data[i],
+		}
+		head.Next = newNode
+		head = head.Next
+	}
+	return node.Next
+}
+func print(l *ListNode)  {
+	for l.Next != nil {
+		fmt.Println(l.Val)
+		l = l.Next
+	}
+	fmt.Print(l.Val)
+
+
+}
+
+func main()  {
+	l1 := create(0,2,3)
+	l2 := create(4,5,6)
+	l3 := create(1,5,8)
+	l4 := mergeKLists2([]*ListNode{l1,l2,l3})
+	print(l4)
+}
+
+func mergeKLists2(lists []*ListNode)*ListNode {
+	temp := minHeap(lists)
+	h := &temp
+	heap.Init(h)
+	dummy := &ListNode{}
+	head := dummy
+	for h.Len() > 0 {
+		p :=  heap.Pop(h).(*ListNode)
+		head.Next = p
+		head = head.Next
+		for _, v := range lists {
+			if v == p {
+				if v.Next != nil {
+					v = v.Next
+					h.Push(v)
+				}
+				break
+			}
+		}
+		//强转ListNode ,string() 是这么转, 转成 *指针类型
+	}
+	return dummy.Next
+}
+
+//要实现heap 需要实现5个方法, 接口必须得用方法来接不是函数 , pop push , sort 里面 的 less ,swap ,len
 type minHeap []*ListNode
 
 func (m minHeap) Len() int {
@@ -34,11 +92,11 @@ func (m minHeap) Swap(i, j int) {
 	m[i], m[j] = m[j], m[i]
 }
 
-func (m *minHeap) Push(x any) {
+func (m *minHeap) Push(x interface{}) {
 	*m = append(*m, x.(*ListNode))
 }
 
-func (m *minHeap) Pop() any {
+func (m *minHeap) Pop() interface{} {
 	size := len(*m)
 	res := (*m)[size-1]
 	*m = (*m)[:size-1]

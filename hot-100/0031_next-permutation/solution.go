@@ -6,7 +6,7 @@ __date__ = '2023/03/10 15:18'
 package main
 
 import "fmt"
-
+//2023-08-15
 func main()  {
 	nums := nextPermutation2([]int{5,6,7,3,2,1})
 	fmt.Println(nums)

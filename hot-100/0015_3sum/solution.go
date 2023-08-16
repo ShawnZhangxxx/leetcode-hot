@@ -14,6 +14,7 @@ func main() {
 	res := threeSum2([]int{1, 0, -1, 3, 4, -3})
 	fmt.Println(res)
 }
+//1.排序 2.遍历一遍,从改数两个边界往里面挤
 func threeSum2(nums []int) [][]int {
 
 	var res [][]int

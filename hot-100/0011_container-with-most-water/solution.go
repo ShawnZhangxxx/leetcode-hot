@@ -15,11 +15,9 @@ func main() {
 	fmt.Println(res)
 }
 
-func main() {
-	maxArea([]int{1,2,3})
-}
 
 
+//两遍往里挤,哪个小哪个往里挤*地儿-->更新下容积
 func maxArea(height []int) int {
 	left, right := 0, len(height)-1
 	res, area := 0, 0

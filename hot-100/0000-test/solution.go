@@ -8,10 +8,15 @@ package main
 import "fmt"
 
 func main() {
-	arr := []int{1, 11, 3, 9}
+	arr := []int{2, 11, 3, 9}
 	fmt.Println(arr[len(arr) -1: ])
 	fmt.Println(arr[:len(arr) -1])
+	fmt.Println(arr[:1])
+	fmt.Println(arr[1:])
+	array(arr)
+	fmt.Println(arr)
 }
 
-
-
+func array(arr []int)  {
+	arr[0] = 1
+}

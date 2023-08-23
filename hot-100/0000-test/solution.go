@@ -19,6 +19,16 @@ func main() {
 	arr2 := arr[:]//切片
 	arr[0] = 10
 	fmt.Println(arr2)
+
+	m := map[string]int{"a":1,"b":2}
+	for k, v := range m {
+		//v = 10
+		//m[k] = v+1
+		m[k] ++
+		fmt.Println(v)
+	}
+	fmt.Println(m)
+
 }
 
 func array1(arr []int)  { //内层修改切片外面也会变

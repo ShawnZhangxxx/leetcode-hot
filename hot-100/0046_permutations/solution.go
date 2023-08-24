@@ -36,12 +36,15 @@ func  backTracking2(nums ,track []int,res *[][]int)  {
 		*res = append(*res,append([]int(nil),track...))//
 	}
 	for i := 0; i < len(nums); i++ {
-		track = append(track,nums[i])
-		newNums := append(nums[:i],nums[(i+1):]...)  //如果用下面的的,
-		backTracking(newNums,track,res)
+		cur := nums[i]
+		track = append(track,cur)
+		nums = append(nums[:i], nums[i+1:]...)
+		backTracking2(nums,track,res)
+		nums = append(nums[:i], append([]int{cur}, nums[i:]...)...)
 		track = track[:len(track)-1]
 	}
 }
+
 
 func backTracking(nums, track []int, res *[][]int) {
 	if len(nums) == 0 {

@@ -10,6 +10,8 @@ package main
 
 import "math"
 
+
+//将每一层看作上一题的的柱状矩形,
 func maximalRectangle(matrix [][]byte) int {
 	if matrix == nil || len(matrix) == 0 || len(matrix[0]) == 0 {
 		return 0

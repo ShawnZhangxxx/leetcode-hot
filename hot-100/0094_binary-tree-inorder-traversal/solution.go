@@ -65,6 +65,7 @@ func inorderTraversal3(root *TreeNode) []int { //迭代
 		stack []*TreeNode
 		res   []int
 	)
+	// stack = append(stack, root)
 	// for len(stack) > 0 {
 	// 	for root != nil && root.Left != nil {
 	// 		stack = append(stack, root.Left)
@@ -80,7 +81,7 @@ func inorderTraversal3(root *TreeNode) []int { //迭代
 	// }
 
 	for {
-		for root != nil {
+		for root != nil { //比自己的方法的区别是，判断root的值，而不是root.left，节俭的很多代码，而且包含初始化条件
 			stack = append(stack, root)
 			root = root.Left
 		}

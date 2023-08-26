@@ -51,9 +51,6 @@ func mergeKLists4(lists []*ListNode, l int, r int) *ListNode { //归并合并
 	if l == r {
 		return lists[l]
 	}
-	if l > r {
-		return nil
-	}
 
 	list1 := mergeKLists4(lists, l, (l+r)/2)
 	list2 := mergeKLists4(lists, (l+r)/2+1, r)

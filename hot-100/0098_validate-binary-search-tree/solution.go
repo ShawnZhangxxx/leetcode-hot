@@ -29,8 +29,8 @@ func main() {
 	root = insert(root, 7)
 	root = insert(root, 4)
 	root = insert(root, 2)
-	root.Left.Left.Left = &TreeNode{
-		Val: 8,
+	root.Left.Left.Right = &TreeNode{
+		Val: 3,
 	}
 	res := isValidBST2(root)
 	fmt.Println(res)

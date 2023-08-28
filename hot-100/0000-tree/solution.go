@@ -65,15 +65,19 @@ func initTreeLayer( Data ...int) *TreeNode {
 func printTreeLayer( root *TreeNode)  {
 	var queue []*TreeNode
 	queue =  append(queue,root)
-	for len(queue) > 0 {
-		top := queue[0]
-		queue = queue[1:]
-		fmt.Println(top.Val)
-		if top.Left != nil {
-			queue = append(queue,top.Left)
+	for len(queue) > 0 { //
+		size := len(queue)
+		for i := 0; i < size; i++ { //这是一层
+			top := queue[0]
+			queue = queue[1:]
+			fmt.Println(top.Val)
+			if top.Left != nil {
+				queue = append(queue,top.Left)
+			}
+			if top.Right != nil {
+				queue = append(queue,top.Right)
+			}
 		}
-		if top.Right != nil {
-			queue = append(queue,top.Right)
-		}
+
 	}
 }

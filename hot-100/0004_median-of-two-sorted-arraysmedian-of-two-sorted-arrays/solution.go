@@ -20,32 +20,32 @@ func findMedianSortedArrays(nums1, nums2 []int) float64 {
 }
 
 func findKth(nums1, nums2 []int, i, j, k int) int {
-	if i >= len(nums1) {
+	if i >= len(nums1) { //不可能> ,只有等于,被上一轮排空了
 		return nums2[j+k-1]
 	}
 
-	if j >= len(nums2) {
+	if j >= len(nums2) { //
 		return nums1[i+k-1]
 	}
 
-	if k == 1 {
+	if k == 1 {//如果只找一个
 		return min(nums1[i], nums2[j])
 	}
 
 	var midVal1, midVal2 int
-	if i+k/2-1 < len(nums1) {
+	if i+k/2-1 < len(nums1) {     //找+2/k后的中间值,如果超过最大长度直接砍 另一个数组
 		midVal1 = nums1[i+k/2-1]
 	} else {
 		midVal1 = math.MaxInt64
 	}
 
-	if j+k/2-1 < len(nums2) {
+	if j+k/2-1 < len(nums2) {   //找+2/k后的中间值,如果超过最大长度直接砍 另一个数组
 		midVal2 = nums2[j+k/2-1]
 	} else {
 		midVal2 = math.MaxInt64
 	}
 
-	if midVal1 < midVal2 {
+	if midVal1 < midVal2 {//2大,砍1 k/2
 		return findKth(nums1, nums2, i+k/2, j, k-k/2)
 	} else {
 		return findKth(nums1, nums2, i, j+k/2, k-k/2)

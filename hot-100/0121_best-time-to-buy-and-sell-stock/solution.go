@@ -8,6 +8,26 @@
 
 package main
 
+import "fmt"
+
+func main()  {
+	res := maxProfit2([]int{7,1,5,3,6,4})
+	fmt.Println(res)
+}
+
+//besttime 其实只有两个时机,不是多个买卖时机
+func maxProfit2(prices []int) int {
+	low := prices[0]
+	maxProfit := 0
+	for i := 0; i < len(prices); i++ {
+		if prices[i] < low {
+			low = prices[i]
+		}
+		maxProfit = max(maxProfit,prices[i]-low)
+	}
+	return maxProfit
+}
+
 func maxProfit(prices []int) int {
 	if len(prices) <= 1 {
 		return 0

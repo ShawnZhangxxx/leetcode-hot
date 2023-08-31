@@ -8,6 +8,15 @@
 
 package main
 
+import "fmt"
+
+func main()  {
+	fmt.Println(0^0)
+	//^ 相同为0不同为1, 0和任何数异或还是那个数,相同为0不同为1
+	res := singleNumber([]int{2,2,3,5,3})
+	fmt.Println(res)
+}
+
 func singleNumber(nums []int) int {
 	a := 0
 	for _, num := range nums {

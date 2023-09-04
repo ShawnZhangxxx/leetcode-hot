@@ -12,6 +12,12 @@ type ListNode struct {
 	Val  int
 	Next *ListNode
 }
+//这个题干真是没搞懂,example为什么1节点不是相交节点,
+//懂了,这个逼题,相交位置必须还得和头节点距离一样 这个解法是快慢指针的解法
+
+//1,1,1
+//1,1 他俩的相交节点为
+
 
 func getIntersectionNode(h1, h2 *ListNode) *ListNode {
 	l1, l2 := h1, h2

@@ -64,9 +64,7 @@ func (this *LRUCache2) Get2(number int) int {
 	return -1
 }
 
-func (this *LRUCache2) Put2(number int) int {
 
-}
 
 type Node struct {
 	key, value int

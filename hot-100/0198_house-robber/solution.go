@@ -8,6 +8,29 @@
 
 package main
 
+import "fmt"
+
+func main()  {
+	//res := rob2([]int{2,7,9,3,1})
+	res := rob2([]int{1,2,3,1})
+	fmt.Println(res)
+
+}
+
+func rob2(nums []int)  int{
+	dp := make([]int,len(nums) + 1)
+	dp[0] = 0
+	dp[1] = nums[0]
+	dp[2] = nums[0]
+	for i := 3; i <= len(nums); i++ {
+		dp[i] = max(dp[i-2],dp[i-3]) + nums[i-1]
+	}
+	fmt.Println(dp)
+	return max(dp[len(nums)],dp[len(nums) -1])
+
+}
+
+
 func rob(nums []int) int {
 	size := len(nums)
 	if size == 0 {

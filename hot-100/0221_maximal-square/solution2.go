@@ -29,7 +29,7 @@ func maximalSquare(matrix [][]byte) int {
 		dp[i] = make([]int,len(matrix[0]))
 		dp[i][0] = int(matrix[i][0])
 	}
-	//初始化边界
+	//初始化边界 也可以放到下面初始化,当i / j= 0时边界顺便初始化掉,因为用不上
 	for i := 0; i < len(matrix[0]); i++ {
 		dp[0][i] = int(matrix[0][i])
 	}

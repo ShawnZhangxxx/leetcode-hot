@@ -8,7 +8,44 @@
 
 package main
 
-import "math"
+import (
+	"fmt"
+	"math"
+)
+
+func main()  {
+	res:= perfectSquare2(198)
+	fmt.Println(res)
+}
+
+func perfectSquare2(num int)int  {
+	dp := make([]int,num+1)
+	//dp[0] = 0
+	for i := 1; i <= num; i++ {
+		minNum := math.MaxInt64
+		for j := 1; j * j <= i; j++ {
+			minNum = min(minNum,dp[i-j*j])
+		}
+		dp[i] = minNum + 1
+
+	}
+	return dp[num]
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 func numSquares(n int) int {
 	dp := make([]int, n+1)

@@ -30,6 +30,7 @@ func main2() {
 	fmt.Println(arr)
 	addArrPointer(&arr)
 	fmt.Println(arr)
+	make([]int,1,2)
 
 }
 

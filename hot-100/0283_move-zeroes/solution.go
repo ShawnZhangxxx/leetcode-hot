@@ -8,6 +8,37 @@
 
 package main
 
+import "fmt"
+
+func main()  {
+	nums := []int{0,1,2,3,0,0,1}
+	moveZero2(nums)
+	fmt.Println(nums)
+}
+
+func moveZero2( nums []int)  {
+	z := 0
+	for i := 0; i < len(nums); i++ {
+		if nums[i] != 0 {
+			nums[i],nums[z] = nums[z],nums[i]
+			z++
+		}
+	}
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
 func moveZeroes(nums []int) {
 	i, j := 0, 0
 	for j < len(nums) {

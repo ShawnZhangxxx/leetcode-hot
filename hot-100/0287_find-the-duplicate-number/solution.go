@@ -8,6 +8,12 @@
 
 package main
 
+func main()  {
+
+}
+
+
+
 func findDuplicate(nums []int) int {
 	slow := nums[0]
 	fast := nums[0]

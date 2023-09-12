@@ -9,7 +9,6 @@
 package main
 
 import "math"
-
 /*
 sold：
 前一天hold，当日卖出股票

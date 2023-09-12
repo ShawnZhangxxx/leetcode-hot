@@ -8,6 +8,30 @@
 
 package main
 
+import "fmt"
+
+func main()  {
+	res := lengthOfLIS2([]int{10,9,2,5,3,7,101,18})
+	fmt.Println(res)
+}
+
+//这是连续递增子序列
+func lengthOfLIS2(nums []int) int {
+	n := len(nums)
+	dp := make([]int, n)
+	maxLen := 0
+	dp[0] =1
+	for i := 1; i < n; i++ {
+		dp[i] = 1
+		if nums[i] > nums[i-1] {
+			dp[i] = dp[i-1]+1
+		}
+		maxLen = max(maxLen, dp[i])
+	}
+	return maxLen
+}
+
+//这才是
 func lengthOfLIS(nums []int) int {
 	n := len(nums)
 	dp := make([]int, n)
@@ -20,7 +44,6 @@ func lengthOfLIS(nums []int) int {
 				dp[i] = max(dp[i], dp[j]+1)
 			}
 		}
-
 		maxLen = max(maxLen, dp[i])
 	}
 

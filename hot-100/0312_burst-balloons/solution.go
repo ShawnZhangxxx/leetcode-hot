@@ -28,7 +28,6 @@ func maxCoins(nums []int) int {
 			}
 		}
 	}
-
 	return dp[1][n]
 }
 

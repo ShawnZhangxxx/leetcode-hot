@@ -1,0 +1,15 @@
+/*
+__author__ = 'robin-luo'
+__date__ = '2023/03/07 14:02'
+*/
+
+package main
+
+
+func main() {
+
+	//1.俩个节点公共祖先
+    function low()
+
+
+}

@@ -9,9 +9,65 @@ package main
 func main() {
 
 	//1.返回字符串全部子序列,如果重复的去重 leetcode 78题
-    f(string s , int i,[]int path,map set){
+    	// s[i...]，之前决定的路径path，set收集结果时去重
+    	public static void f1(char[] s, int i, StringBuilder path, HashSet<String> set) {
+    		if (i == s.length) {
+    			set.add(path.toString());
+    		} else {
+    			path.append(s[i]); // 加到路径中去
+    			f1(s, i + 1, path, set);
+    			path.deleteCharAt(path.length() - 1); // 从路径中移除 回溯
+    			f1(s, i + 1, path, set);
+    		}
+    	}
 
-    }
+
+题目2 : 返回数组的所有组合，可以无视元素顺序。时间复杂度O(2^n * n)
+// 给你一个整数数组 nums ，其中可能包含重复元素，请你返回该数组所有可能的组合
+// 答案 不能 包含重复的组合。返回的答案中，组合可以按 任意顺序 排列
+// 注意其实要求返回的不是子集，因为子集一定是不包含相同元素的，要返回的其实是不重复的组合
+// 比如输入：nums = [1,2,2]
+// 输出：[[],[1],[1,2],[1,2,2],[2],[2,2]]
+// 测试链接 : https://leetcode.cn/problems/subsets-ii/
+public class Code02_Combinations {
+	public static List<List<Integer>> subsetsWithDup(int[] nums) {
+		List<List<Integer>> ans = new ArrayList<>();
+		Arrays.sort(nums);
+		f(nums, 0, new int[nums.length], 0, ans);
+		return ans;
+	}
+	public static void f(int[] nums, int i, int[] path, int size, List<List<Integer>> ans) {
+		if (i == nums.length) {
+			ArrayList<Integer> cur = new ArrayList<>();
+			for (int j = 0; j < size; j++) {
+				cur.add(path[j]);
+			}
+			ans.add(cur);
+		} else {
+			// 下一组的第一个数的位置
+			int j = i + 1;
+			while (j < nums.length && nums[i] == nums[j]) {
+				j++;
+			}
+			// 当前数x，要0个
+			f(nums, j, path, size, ans);
+			// 当前数x，要1个、要2个、要3个...都尝试
+			for (; i < j; i++) {
+				path[size++] = nums[i];
+				f(nums, j, path, size, ans);
+			}
+		}
+	}
+}
+
+题目3 : 返回没有重复值数组的全部排列。时间复杂度O(n! * n)
+
+
+题目4 : 返回可能有重复值数组的全部排列，排列要求去重。时间复杂度O(n! * n)
+题目5 : 用递归逆序一个栈。时间复杂度O(n^2)
+题目6 : 用递归排序一个栈。时间复杂度O(n^2)
+题目7 : 打印n层汉诺塔问题的最优移动轨迹。时间复杂度O(2^n)
+
 
 
 }

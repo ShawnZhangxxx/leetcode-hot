@@ -8,8 +8,190 @@ package main
 
 func main() {
 
-	//1.俩个节点公共祖先
-    function low()
+	//1.俩个节点最近公共祖先
+    function lowestCommonAncestor(TreeNode root,TreeNode p ,TreeNode q){
+        if(root == null || root == p || root == q){
+            return root
+        }
+        TreeNode l = lowestCommonAncestor(root.left,p,q)
+        TreeNode r = lowestCommonAncestor(root.right,p,q)
+
+        if(l!= null && r!= null){
+            return root
+        }
+        if(l == null && r == null){
+            return null
+        }
+        return l!=null?l:r   //这个值是从下层往上传递的
+    }
+
+    //2.搜索二叉树上寻找俩个节点的公共祖先 有无重复数值(),上面那个是引用传递,不存在相等情况 leetcode 222
+        //      root
+        // 小于root  >root
+        function lowestCommonAncestor(TreeNode root,TreeNode p ,TreeNode q){
+            if(root == null || root == p || root == q){
+                return root
+            }
+            if(p.val < root.val && q.val > root.Val ) {
+                return root
+            }else if(p.val < root.val){
+                return lowestCommonAncestor(root.left,p,q)
+            }else {
+                return lowestCommonAncestor(root.right,p,q)
+            }
+        }
+
+      function lowestCommonAncestor(TreeNode root,TreeNode p ,TreeNode q){
+            while(root.val != p.val && root.val != q.val){
+                if(Math.min(p.val,q.val) < root.val && root.val < math.max(p.val,q.val)){ //分叉上
+                    break;
+                }
+                root = root.val < math.min(p.val,q.val) ? root.right :root.left
+            }
+            return root
+      }
+
+
+      //3.收集累加和,头到页节点,收集路径     leetcode 113  递归+回溯算法  遍历路径问题
+      func pathSum(root *TreeNode, targetSum int) (ans [][]int) {
+          path := []int{}
+          var dfs func(*TreeNode, int)
+          dfs = func(node *TreeNode, left int) {
+              if node == nil {
+                  return
+              }
+              left -= node.Val
+              path = append(path, node.Val)
+              defer func() { path = path[:len(path)-1] }() //回溯算法
+              if node.Left == nil && node.Right == nil && left == 0 {
+                  ans = append(ans, append([]int(nil), path...))
+                  return
+              }
+              dfs(node.Left, left)
+              dfs(node.Right, left)
+          }
+          dfs(root, targetSum)
+          return
+      }
+
+    //4.判断一棵是否是平衡二叉树      |左树高-右数高|<=1
+     function height(Treenode root){  //这不就之前求二叉树最大高度的题吗? 拆开写,后置位判断一下
+        if(!banlance || root == null ){
+            return 0
+        }
+            int lh = height(cur.left)
+            int rh = height(cur.right)
+            if (Math.abs(lh-rh) > 1){
+                banlance = false
+            }
+            return max(lh,rh)+1
+     }
+
+
+    //5.验证搜索二叉树 98题
+    //中序遍历是升序的话就可以
+    func isValidBST(root *TreeNode) bool {
+        return helper(root, math.MinInt64, math.MaxInt64)
+    }
+    func helper(root *TreeNode, lower, upper int) bool { //为了避免用子判断,从上面传递值进去
+        if root == nil {
+            return true
+        }
+        if root.Val <= lower || root.Val >= upper {
+            return false
+        }
+        return helper(root.Left, lower, root.Val) && helper(root.Right, root.Val, upper)
+    }
+
+    func isValidBST(root *TreeNode) bool { //顺序 中序遍历
+        stack := []*TreeNode{}
+        inorder := math.MinInt64
+        for len(stack) > 0 || root != nil {
+            for root != nil {
+                stack = append(stack, root)
+                root = root.Left
+            }
+            root = stack[len(stack)-1]
+            stack = stack[:len(stack)-1]
+            if root.Val <= inorder {
+                return false
+            }
+            inorder = root.Val
+            root = root.Right
+        }
+        return true
+    }
+
+    //6.修剪搜索二叉树  leetcode 669
+    func trimBST(root *TreeNode, low, high int) *TreeNode {
+        if root == nil {
+            return nil
+        }
+        if root.Val < low {
+            return trimBST(root.Right, low, high)
+        }
+        if root.Val > high {
+            return trimBST(root.Left, low, high)
+        }
+        root.Left = trimBST(root.Left, low, high)
+        root.Right = trimBST(root.Right, low, high)
+        return root
+    }
+
+    //7.二叉树打家劫社,不能偷他相邻的子节点, leetcode 337 medium
+    全局变量法 yes 全局变量
+    aYes = root.val + Nob + NOc
+    yes
+    no
+
+    func rob(root *TreeNode){
+        if root == nil {
+            yes = 0
+            no = 0
+        }else{
+            int y = root.val
+            int n = 0
+            rob(root.left)
+            y += no
+            n += max(yes,no)
+            rob(root.right)
+            y+= no
+            n += max(yes,no)
+            yes = y
+            no = n
+        }
+
+
+
+    }
+
+
+
+
+    func rob(root *TreeNode) int {
+        val := dfs(root)
+        return max(val[0], val[1])
+    }
+
+    func dfs(node *TreeNode) []int {
+        if node == nil {
+            return []int{0, 0}
+        }
+        l, r := dfs(node.Left), dfs(node.Right)
+        selected := node.Val + l[1] + r[1]
+        notSelected := max(l[0], l[1]) + max(r[0], r[1])
+        return []int{selected, notSelected}
+    }
+
+    func max(x, y int) int {
+        if x > y {
+            return x
+        }
+        return y
+    }
+
+
+
 
 
 }

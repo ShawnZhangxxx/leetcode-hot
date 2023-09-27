@@ -1,0 +1,348 @@
+/*
+__author__ = 'robin-luo'
+__date__ = '2023/03/07 14:02'
+*/
+
+package main
+
+
+func main() {
+
+	//1.返回字符串全部子序列,如果重复的去重 leetcode 78题
+    	// s[i...]，之前决定的路径path，set收集结果时去重
+    	public static void f1(char[] s, int i, StringBuilder path, HashSet<String> set) {
+    		if (i == s.length) {
+    			set.add(path.toString());
+    		} else {
+    			path.append(s[i]); // 加到路径中去
+    			f1(s, i + 1, path, set);
+    			path.deleteCharAt(path.length() - 1); // 从路径中移除 回溯
+    			f1(s, i + 1, path, set);
+    		}
+    	}
+题目2 : 返回数组的所有组合，可以无视元素顺序。时间复杂度O(2^n * n)
+// 给你一个整数数组 nums ，其中可能包含重复元素，请你返回该数组所有可能的组合
+// 答案 不能 包含重复的组合。返回的答案中，组合可以按 任意顺序 排列
+// 注意其实要求返回的不是子集，因为子集一定是不包含相同元素的，要返回的其实是不重复的组合
+// 比如输入：nums = [1,2,2]
+// 输出：[[],[1],[1,2],[1,2,2],[2],[2,2]]
+// 测试链接 : https://leetcode.cn/problems/subsets-ii/
+public class Code02_Combinations {
+	public static List<List<Integer>> subsetsWithDup(int[] nums) {
+		List<List<Integer>> ans = new ArrayList<>();
+		Arrays.sort(nums);
+		f(nums, 0, new int[nums.length], 0, ans);
+		return ans;
+	}
+	public static void f(int[] nums, int i, int[] path, int size, List<List<Integer>> ans) {
+		if (i == nums.length) {
+			ArrayList<Integer> cur = new ArrayList<>();
+			for (int j = 0; j < size; j++) {
+				cur.add(path[j]);
+			}
+			ans.add(cur);
+		} else {
+			// 下一组的第一个数的位置
+			int j = i + 1;
+			while (j < nums.length && nums[i] == nums[j]) {
+				j++;
+			}
+			// 当前数x，要0个
+			f(nums, j, path, size, ans);
+			// 当前数x，要1个、要2个、要3个...都尝试
+			for (; i < j; i++) {
+				path[size++] = nums[i];
+				f(nums, j, path, size, ans);
+			}
+		}
+	}
+}
+
+题目3 : 返回没有重复值数组的全部排列。时间复杂度O(n! * n) ,不考虑去重
+输入：nums = [1,2,3]
+输出：[[1,2,3],[1,3,2],[2,1,3],[2,3,1],[3,1,2],[3,2,1]]
+
+public static List<List<Integer>> permute(int[] nums) {
+		List<List<Integer>> ans = new ArrayList<>();
+		f(nums, 0, ans);
+		return ans;
+	}
+
+	public static void f(int[] nums, int i, List<List<Integer>> ans) {
+		if (i == nums.length) {
+			List<Integer> cur = new ArrayList<>();
+			for (int num : nums) {
+				cur.add(num);
+			}
+			ans.add(cur);
+		} else {
+			for (int j = i; j < nums.length; j++) {
+			    //循环为了先确定i位置之前的元素,然后不会在动,可以让每个元素都到了初始位置,之后再进行递归,
+				swap(nums, i, j); //这句话相当于干掉j个元素,比较难理解这个解法,而且这个i的位置被换到j,i的相对顺序不是错乱了吗? 这是全排列,最后是吧nums所有元素加到集合里面的
+				f(nums, i + 1, ans); //这个
+				swap(nums, i, j); // 特别重要，课上进行了详细的图解 ,这就是把之前换过去的再换回来
+			}
+		}
+	}
+
+题目4 : 返回可能有重复值数组的全部排列，排列要求去重。时间复杂度O(n! * n)
+
+	public static List<List<Integer>> permuteUnique(int[] nums) {
+		List<List<Integer>> ans = new ArrayList<>();
+		f(nums, 0, ans);
+		return ans;
+	}
+
+	public static void f(int[] nums, int i, List<List<Integer>> ans) {
+		if (i == nums.length) {
+			List<Integer> cur = new ArrayList<>();
+			for (int num : nums) {
+				cur.add(num);
+			}
+			ans.add(cur);
+		} else {
+			HashSet<Integer> set = new HashSet<>();
+			for (int j = i; j < nums.length; j++) {
+				// nums[j]没有来到过i位置，才会去尝试
+				if (!set.contains(nums[j])) {
+					set.add(nums[j]);
+					swap(nums, i, j);
+					f(nums, i + 1, ans);
+					swap(nums, i, j);
+				}
+			}
+		}
+	}
+
+题目5 : 用递归逆序一个栈。时间复杂度O(n^2) 这个涉及到两次递归.
+public static void reverse(Stack<Integer> stack) {
+		if (stack.isEmpty()) {
+			return;
+		}
+		int num = bottomOut(stack);
+		reverse(stack); //这块儿截断了,现在栈里没有最下面的元素了,继续递归搞倒数第二个元素
+		stack.push(num);
+	}
+
+	// 栈底元素移除掉，上面的元素盖下来,  一次只搞最下面那个元素
+	// 返回移除掉的栈底元素
+	public static int bottomOut(Stack<Integer> stack) {
+		int ans = stack.pop();
+		if (stack.isEmpty()) {
+			return ans;
+		} else {
+			int last = bottomOut(stack);
+			stack.push(ans);
+			return last;
+		}
+	}
+	public static void main(String[] args) {
+		Stack<Integer> stack = new Stack<Integer>();
+		stack.push(1);
+		stack.push(2);
+		stack.push(3);
+		stack.push(4);
+		stack.push(5);
+		reverse(stack);
+		while (!stack.isEmpty()) {
+			System.out.println(stack.pop());
+		}
+	}
+
+
+
+题目6 : 用递归排序一个栈。时间复杂度O(n^2)
+
+package class038;
+
+import java.util.Stack;
+
+// 用递归函数排序栈
+// 栈只提供push、pop、isEmpty三个方法
+// 请完成无序栈的排序，要求排完序之后，从栈顶到栈底从小到大
+// 只能使用栈提供的push、pop、isEmpty三个方法、以及递归函数
+// 除此之外不能使用任何的容器，数组也不行
+// 就是排序过程中只能用：
+// 1) 栈提供的push、pop、isEmpty三个方法
+// 2) 递归函数，并且返回值最多为单个整数
+public class Code06_SortStackWithRecursive {
+
+	public static void sort(Stack<Integer> stack) {
+		int deep = deep(stack);
+		while (deep > 0) {
+			int max = max(stack, deep);
+			int k = times(stack, deep, max);
+			down(stack, deep, max, k);
+			deep -= k;
+		}
+	}
+
+	// 返回栈的深度
+	// 不改变栈的数据状况
+	public static int deep(Stack<Integer> stack) {
+		if (stack.isEmpty()) {
+			return 0;
+		}
+		int num = stack.pop();
+		int deep = deep(stack) + 1;
+		stack.push(num);
+		return deep;
+	}
+
+	// 从栈当前的顶部开始，往下数deep层
+	// 返回这deep层里的最大值
+	public static int max(Stack<Integer> stack, int deep) {
+		if (deep == 0) {
+			return Integer.MIN_VALUE;
+		}
+		int num = stack.pop();
+		int restMax = max(stack, deep - 1);
+		int max = Math.max(num, restMax);
+		stack.push(num);
+		return max;
+	}
+
+	// 从栈当前的顶部开始，往下数deep层，已知最大值是max了
+	// 返回，max出现了几次，不改变栈的数据状况
+	public static int times(Stack<Integer> stack, int deep, int max) {
+		if (deep == 0) {
+			return 0;
+		}
+		int num = stack.pop();
+		int restTimes = times(stack, deep - 1, max);
+		int times = restTimes + (num == max ? 1 : 0);
+		stack.push(num);
+		return times;
+	}
+
+	// 从栈当前的顶部开始，往下数deep层，已知最大值是max，出现了k次
+	// 请把这k个最大值沉底，剩下的数据状况不变
+	public static void down(Stack<Integer> stack, int deep, int max, int k) {
+		if (deep == 0) {
+			for (int i = 0; i < k; i++) {
+				stack.push(max);
+			}
+		} else {
+			int num = stack.pop();
+			down(stack, deep - 1, max, k);
+			if (num != max) {
+				stack.push(num);
+			}
+		}
+	}
+
+	// 为了测试
+	// 生成随机栈
+	public static Stack<Integer> randomStack(int n, int v) {
+		Stack<Integer> ans = new Stack<Integer>();
+		for (int i = 0; i < n; i++) {
+			ans.add((int) (Math.random() * v));
+		}
+		return ans;
+	}
+
+	// 为了测试
+	// 检测栈是不是从顶到底依次有序
+	public static boolean isSorted(Stack<Integer> stack) {
+		int step = Integer.MIN_VALUE;
+		while (!stack.isEmpty()) {
+			if (step > stack.peek()) {
+				return false;
+			}
+			step = stack.pop();
+		}
+		return true;
+	}
+
+	// 为了测试
+	public static void main(String[] args) {
+		Stack<Integer> test = new Stack<Integer>();
+		test.add(1);
+		test.add(5);
+		test.add(4);
+		test.add(5);
+		test.add(3);
+		test.add(2);
+		test.add(3);
+		test.add(1);
+		test.add(4);
+		test.add(2);
+		sort(test);
+		while (!test.isEmpty()) {
+			System.out.println(test.pop());
+		}
+
+		// 随机测试
+		int N = 20;
+		int V = 20;
+		int testTimes = 20000;
+		System.out.println("测试开始");
+		for (int i = 0; i < testTimes; i++) {
+			int n = (int) (Math.random() * N);
+			Stack<Integer> stack = randomStack(n, V);
+			sort(stack);
+			if (!isSorted(stack)) {
+				System.out.println("出错了!");
+				break;
+			}
+		}
+		System.out.println("测试结束");
+	}
+
+}
+
+
+
+
+题目7 : 打印n层汉诺塔问题的最优移动轨迹。时间复杂度O(2^n)
+package class038;
+
+// 打印n层汉诺塔问题的最优移动轨迹
+public class Code07_TowerOfHanoi {
+
+	public static void hanoi(int n) {
+		if (n > 0) {
+			f(n, "左", "右", "中");
+		}
+	}
+
+	public static void f(int i, String from, String to, String other) {
+		if (i == 1) {
+			System.out.println("移动圆盘 1 从 " + from + " 到 " + to);
+		} else {
+			f(i - 1, from, other, to);
+			System.out.println("移动圆盘 " + i + " 从 " + from + " 到 " + to);
+			f(i - 1, other, to, from);
+		}
+	}
+
+	public static void main(String[] args) {
+		int n = 3;
+		hanoi(n);
+	}
+
+}
+
+package main
+
+import "fmt"
+
+// Move function to move disk from source to target, with auxiliary as helper
+func Move(n int, source string, target string, auxiliary string) {
+    if n == 1 {
+        fmt.Printf("Move disk 1 from %s to %s\n", source, target)
+    } else {
+        Move(n-1, source, auxiliary, target)
+        fmt.Printf("Move disk %d from %s to %s\n", n, source, target)
+        Move(n-1, auxiliary, target, source)
+    }
+}
+
+func main() {
+    var n int = 3 // Number of disks
+    Move(n, "A", "C", "B")
+}
+
+
+
+}

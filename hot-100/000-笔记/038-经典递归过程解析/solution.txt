@@ -3,71 +3,192 @@ __author__ = 'robin-luo'
 __date__ = '2023/03/07 14:02'
 */
 
-package main
 
 
-func main() {
+//1. 嵌套 字符运算 "12+22*(3+2)*5"
+// 测试链接 : https://leetcode.cn/problems/basic-calculator-iii/ plus会员题
+public class Code01_BasicCalculatorIII {
 
-	//1.返回字符串全部子序列,如果重复的去重 leetcode 78题
-    	// s[i...]，之前决定的路径path，set收集结果时去重
-    	public static void f1(char[] s, int i, StringBuilder path, HashSet<String> set) {
-    		if (i == s.length) {
-    			set.add(path.toString());
-    		} else {
-    			path.append(s[i]); // 加到路径中去
-    			f1(s, i + 1, path, set);
-    			path.deleteCharAt(path.length() - 1); // 从路径中移除 回溯
-    			f1(s, i + 1, path, set);
+	public static int calculate(String str) {
+		where = 0;
+		return f(str.toCharArray(), 0);
+	}
+
+	public static int where;
+
+	// s[i....]开始计算，遇到字符串终止 或者 遇到)停止
+	// 返回 : 自己负责的这一段，计算的结果
+	// 返回之间，更新全局变量where，为了上游函数知道从哪继续！
+	public static int f(char[] s, int i) {
+		int cur = 0;
+		ArrayList<Integer> numbers = new ArrayList<>();
+		ArrayList<Character> ops = new ArrayList<>();
+		while (i < s.length && s[i] != ')') {
+			if (s[i] >= '0' && s[i] <= '9') {
+				cur = cur * 10 + s[i++] - '0';
+			} else if (s[i] != '(') {
+				// 遇到了运算符 + - * /
+				push(numbers, ops, cur, s[i++]);
+				cur = 0;
+			} else {
+				// i (.....)
+				// 遇到了左括号！
+				cur = f(s, i + 1);
+				i = where + 1;
+			}
+		}
+		push(numbers, ops, cur, '+');
+		where = i;
+		return compute(numbers, ops);
+	}
+
+	public static void push(ArrayList<Integer> numbers, ArrayList<Character> ops, int cur, char op) {
+		int n = numbers.size();
+		if (n == 0 || ops.get(n - 1) == '+' || ops.get(n - 1) == '-') {
+			numbers.add(cur);
+			ops.add(op);
+		} else {
+			int topNumber = numbers.get(n - 1);
+			char topOp = ops.get(n - 1);
+			if (topOp == '*') {
+				numbers.set(n - 1, topNumber * cur);
+			} else {
+				numbers.set(n - 1, topNumber / cur);
+			}
+			ops.set(n - 1, op);
+		}
+	}
+
+	public static int compute(ArrayList<Integer> numbers, ArrayList<Character> ops) {
+		int n = numbers.size();
+		int ans = numbers.get(0);
+		for (int i = 1; i < n; i++) {
+			ans += ops.get(i - 1) == '+' ? numbers.get(i) : -numbers.get(i);
+		}
+		return ans;
+	}
+
+}
+
+    //2. ab2[ac]3[cd]ab ==> abacaccdcdcdab
+    package class039;
+
+    // 含有嵌套的字符串解码 394  medium
+    // 测试链接 : https://leetcode.cn/problems/decode-string/
+    public class Code02_DecodeString {
+
+    	public static String decodeString(String str) {
+    		where = 0;
+    		return f(str.toCharArray(), 0);
+    	}
+
+    	public static int where;
+
+    	// s[i....]开始计算，遇到字符串终止 或者 遇到 ] 停止
+    	// 返回 : 自己负责的这一段字符串的结果
+    	// 返回之间，更新全局变量where，为了上游函数知道从哪继续！
+    	public static String f(char[] s, int i) {
+    		StringBuilder path = new StringBuilder();
+    		int cnt = 0;
+    		while (i < s.length && s[i] != ']') {
+    			if ((s[i] >= 'a' && s[i] <= 'z') || (s[i] >= 'A' && s[i] <= 'Z')) {
+    				path.append(s[i++]);
+    			} else if (s[i] >= '0' && s[i] <= '9') { //数字有可能是两位数
+    				cnt = cnt * 10 + s[i++] - '0';
+    			} else {
+    				// 遇到 [
+    				// cnt = 7 * ?
+    				path.append(get(cnt, f(s, i + 1)));
+    				i = where + 1;
+    				cnt = 0;
+    			}
+    		}
+    		where = i;
+    		return path.toString();
+    	}
+
+    	public static String get(int cnt, String str) {
+    		StringBuilder builder = new StringBuilder();
+    		for (int i = 0; i < cnt; i++) {
+    			builder.append(str);
+    		}
+    		return builder.toString();
+    	}
+
+    }
+    //3.
+    package class039;
+
+    import java.util.TreeMap;
+
+    // 含有嵌套的分子式求原子数量 h2o    Mg(OH)2  Mg2O2H2  字典序输出  726 hard
+    // 测试链接 : https://leetcode.cn/problems/number-of-atoms/
+    public class Code03_NumberOfAtoms {
+
+    	public static String countOfAtoms(String str) {
+    		where = 0;
+    		TreeMap<String, Integer> map = f(str.toCharArray(), 0);
+    		StringBuilder ans = new StringBuilder();
+    		for (String key : map.keySet()) {
+    			ans.append(key);
+    			int cnt = map.get(key);
+    			if (cnt > 1) {
+    				ans.append(cnt);
+    			}
+    		}
+    		return ans.toString();
+    	}
+
+    	public static int where;
+
+    	// s[i....]开始计算，遇到字符串终止 或者 遇到 ) 停止
+    	// 返回 : 自己负责的这一段字符串的结果，有序表！
+    	// 返回之间，更新全局变量where，为了上游函数知道从哪继续！
+    	public static TreeMap<String, Integer> f(char[] s, int i) {
+    		// ans是总表
+    		TreeMap<String, Integer> ans = new TreeMap<>();
+    		// 之前收集到的名字，历史一部分
+    		StringBuilder name = new StringBuilder();
+    		// 之前收集到的有序表，历史一部分
+    		TreeMap<String, Integer> pre = null;
+    		// 历史翻几倍
+    		int cnt = 0;
+    		while (i < s.length && s[i] != ')') {
+    			if (s[i] >= 'A' && s[i] <= 'Z' || s[i] == '(') {
+    				fill(ans, name, pre, cnt);
+    				name.setLength(0);
+    				pre = null;
+    				cnt = 0;
+    				if (s[i] >= 'A' && s[i] <= 'Z') {
+    					name.append(s[i++]);
+    				} else {
+    					// 遇到 (
+    					pre = f(s, i + 1);
+    					i = where + 1;
+    				}
+    			} else if (s[i] >= 'a' && s[i] <= 'z') {
+    				name.append(s[i++]);
+    			} else {
+    				cnt = cnt * 10 + s[i++] - '0';
+    			}
+    		}
+    		fill(ans, name, pre, cnt);
+    		where = i;
+    		return ans;
+    	}
+
+    	public static void fill(TreeMap<String, Integer> ans, StringBuilder name, TreeMap<String, Integer> pre, int cnt) {
+    		if (name.length() > 0 || pre != null) {
+    			cnt = cnt == 0 ? 1 : cnt;
+    			if (name.length() > 0) {
+    				String key = name.toString();
+    				ans.put(key, ans.getOrDefault(key, 0) + cnt);
+    			} else {
+    				for (String key : pre.keySet()) {
+    					ans.put(key, ans.getOrDefault(key, 0) + pre.get(key) * cnt);
+    				}
+    			}
     		}
     	}
 
-
-题目2 : 返回数组的所有组合，可以无视元素顺序。时间复杂度O(2^n * n)
-// 给你一个整数数组 nums ，其中可能包含重复元素，请你返回该数组所有可能的组合
-// 答案 不能 包含重复的组合。返回的答案中，组合可以按 任意顺序 排列
-// 注意其实要求返回的不是子集，因为子集一定是不包含相同元素的，要返回的其实是不重复的组合
-// 比如输入：nums = [1,2,2]
-// 输出：[[],[1],[1,2],[1,2,2],[2],[2,2]]
-// 测试链接 : https://leetcode.cn/problems/subsets-ii/
-public class Code02_Combinations {
-	public static List<List<Integer>> subsetsWithDup(int[] nums) {
-		List<List<Integer>> ans = new ArrayList<>();
-		Arrays.sort(nums);
-		f(nums, 0, new int[nums.length], 0, ans);
-		return ans;
-	}
-	public static void f(int[] nums, int i, int[] path, int size, List<List<Integer>> ans) {
-		if (i == nums.length) {
-			ArrayList<Integer> cur = new ArrayList<>();
-			for (int j = 0; j < size; j++) {
-				cur.add(path[j]);
-			}
-			ans.add(cur);
-		} else {
-			// 下一组的第一个数的位置
-			int j = i + 1;
-			while (j < nums.length && nums[i] == nums[j]) {
-				j++;
-			}
-			// 当前数x，要0个
-			f(nums, j, path, size, ans);
-			// 当前数x，要1个、要2个、要3个...都尝试
-			for (; i < j; i++) {
-				path[size++] = nums[i];
-				f(nums, j, path, size, ans);
-			}
-		}
-	}
-}
-
-题目3 : 返回没有重复值数组的全部排列。时间复杂度O(n! * n)
-
-
-题目4 : 返回可能有重复值数组的全部排列，排列要求去重。时间复杂度O(n! * n)
-题目5 : 用递归逆序一个栈。时间复杂度O(n^2)
-题目6 : 用递归排序一个栈。时间复杂度O(n^2)
-题目7 : 打印n层汉诺塔问题的最优移动轨迹。时间复杂度O(2^n)
-
-
-
-}
+    }

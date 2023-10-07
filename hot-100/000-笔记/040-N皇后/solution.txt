@@ -100,9 +100,9 @@ public class NQueens {
 			// candidate :
 			// 0 0 0 0 0 0
 			// 5 4 3 2 1 0
-			place = candidate & (-candidate);
-			candidate ^= place;
-			ans += f2(limit, col | place, (left | place) >> 1, (right | place) << 1);
+			place = candidate & (-candidate); //limit & (~ban) = candidate 剩下可以用的列1,   place为提取  最右侧的1
+			candidate ^= place;   //削掉最右侧1改为0
+			ans += f2(limit, col | place, (left | place) >> 1, (right | place) << 1); //下一层的约束
 		}
 		return ans;
 	}

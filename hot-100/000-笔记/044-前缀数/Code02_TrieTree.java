@@ -1,6 +1,7 @@
 package class044;
 
-// 用固定数组实现前缀树，空间使用是静态的。推荐！
+// 用固定数组实现前缀树，空间使用是静态的。推荐！ 结构比较难以直观理解
+
 // 测试链接 : https://www.nowcoder.com/practice/7f8a8553ddbf4eaab749ec988726702b
 // 请同学们务必参考如下代码中关于输入、输出的处理
 // 这是输入输出处理效率很高的写法
@@ -16,15 +17,24 @@ import java.util.Arrays;
 public class Code02_TrieTree {
 
 	// 如果将来增加了数据量，就改大这个值
+
 	public static int MAXN = 150001;
 
-	public static int[][] tree = new int[MAXN][26];
-
+	public static int[][] tree = new int[MAXN][26];  //静态空间,可以复用的,如果是动态空间每次测试用例都要新加内存空间
+    //abc  acc acb
+    [0 0 0]  26相当于26字母hash
+    [2 0 0]
+    [0 3 5]
+    [0 0 4]
+    [0 0 0]
+    [0 7 6]
+    pass [0 0 1 1 1 1]
+              2 3  4 5
 	public static int[] end = new int[MAXN];
 
 	public static int[] pass = new int[MAXN];
 
-	public static int cnt;
+	public static int cnt;  //当前节点编号,递增的
 
 	public static void build() {
 		cnt = 1;

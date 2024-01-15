@@ -21,6 +21,7 @@ func twoSum(nums []int, target int) []int {
 			hashmap[nums[i]] = i
 		}
 	}
+
 	return nil
 }
 

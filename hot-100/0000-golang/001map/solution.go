@@ -16,7 +16,6 @@ func main() {
 	fmt.Println(arr[len(arr) -1: ])
 	fmt.Println(arr[:len(arr) -1])
 
-	array1(arr)
 	array2(arr)
 	fmt.Println(arr)
 	arr2 := arr[:]//切片
